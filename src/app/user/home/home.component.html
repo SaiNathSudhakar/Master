@@ -1,0 +1,22 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>REAL NAME</td>
+      <td>TZ</td>
+      <td width=275 align="center">Activity Periods</td>
+    </tr>
+  </thead>
+  <tbody>
+     <tr *ngFor="let user of users">
+        <td>{{user.id}}</td>
+        <td>{{user.real_name}}</td>
+        <td>{{user.tz}}</td>
+        <td align="center">
+            <a class="btn btn-primary" (click)="getCalender(user)">Calendar</a>
+        </td>
+     </tr>
+
+  </tbody>
+
+</table>

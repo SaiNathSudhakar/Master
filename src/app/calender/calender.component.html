@@ -1,0 +1,55 @@
+<div class="card">
+
+  <div class="row text-center card-header mx-0">
+
+    <div class="col-md-4">
+
+      <div class="btn-group">
+        <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+          Previous
+        </div>
+        <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+          Today
+        </div>
+        <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+          Next
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-4">
+      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+    </div>
+
+    <div class="col-md-4">
+      <div ngbDropdown class="d-inline-block mr-1">
+        <button class="btn btn-primary" id="dropdownMenu1" ngbDropdownToggle>{{viewDate | date: 'LLLL' }}</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownMenu1">
+          <button class="dropdown-item" [class.active]="viewDate.getMonth() === month.getMonth()" *ngFor="let month of monthList" (click)='onMonthSelected(month)'>{{
+            month | date: 'LLLL' }}
+          </button>
+        </div>
+      </div>
+      <div class="btn-group">
+        <div class="btn btn-primary" (click)="view = 'month'" [class.active]="view === 'month'">
+          Month
+        </div>
+        <div class="btn btn-primary" (click)="view = 'week'" [class.active]="view === 'week'">
+          Week
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card-body">
+    <div [ngSwitch]="view">
+      <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events">
+      </mwl-calendar-month-view>
+      <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events">
+      </mwl-calendar-week-view>
+    </div>
+  </div>
+
+</div>
